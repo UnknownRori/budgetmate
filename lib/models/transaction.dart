@@ -40,7 +40,7 @@ class Transaction {
 
 class TransactionRepository {
   // Default dummy data
-  List<Transaction> data = [
+  List<Transaction> _data = [
     Transaction(
         type: TransactionType.income,
         date: DateTime.now(),
@@ -74,22 +74,55 @@ class TransactionRepository {
   ];
 
   void addTransaction(Transaction transaction) {
-    data.add(transaction);
+    _data.add(transaction);
   }
 
   List<Transaction> getAll() {
-    return List.unmodifiable(data);
+    return List.unmodifiable(_data);
   }
 
   bool removeTransactionById(String id) {
     final transactionIndex =
-        data.indexWhere((transaction) => transaction.id == id);
+        _data.indexWhere((transaction) => transaction.id == id);
 
     if (transactionIndex != -1) {
-      data.removeAt(transactionIndex);
+      _data.removeAt(transactionIndex);
       return true;
     }
 
     return false;
+  }
+
+  double get totalBalance {
+    return _data.fold(0, (total, transaction) {
+      switch (transaction.type) {
+        case TransactionType.income:
+          return total + transaction.amount;
+        case TransactionType.expense:
+          return total - transaction.amount;
+      }
+    });
+  }
+
+  double get totalIncome {
+    return _data.fold(0, (total, transaction) {
+      switch (transaction.type) {
+        case TransactionType.income:
+          return total + transaction.amount;
+        case TransactionType.expense:
+          return 0;
+      }
+    });
+  }
+
+  double get totalExpense {
+    return _data.fold(0, (total, transaction) {
+      switch (transaction.type) {
+        case TransactionType.income:
+          return 0;
+        case TransactionType.expense:
+          return 0;
+      }
+    });
   }
 }
