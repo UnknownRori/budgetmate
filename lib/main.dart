@@ -10,12 +10,26 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Budget Mate',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: MainPage(),
+    );
+  }
 }
 
-class _MyAppState extends State<MyApp> {
+class MainPage extends StatefulWidget {
+  @override
+  _MainPageState createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
   bool _isButtonExpanded = false;
   PageController _pageController = PageController(initialPage: 0);
@@ -29,71 +43,118 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Budget Mate',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return Scaffold(
+      body: Stack(
+        children: [
+          PageView(
+            controller: _pageController,
+            onPageChanged: (index) => _changePage(index),
+            children: _pages,
+          ),
+          Positioned(
+            bottom: 35,
+            left: MediaQuery.of(context).size.width / 2.0 - 44 * 2,
+            child: AnimatedOpacity(
+              duration: const Duration(milliseconds: 500),
+              opacity: _isButtonExpanded ? 0.0 : 1.0,
+              child: Center(
+                child: Row(
+                  children: [
+                    ElevatedButton(
+                      onLongPress: () =>
+                          ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Add Income"),
+                          duration: Duration(seconds: 1),
+                        ),
+                      ),
+                      onPressed: () {},
+                      child: const Row(
+                        children: [
+                          Icon(Icons.attach_money, size: 32),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 26),
+                    ElevatedButton(
+                      onLongPress: () =>
+                          ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Add Expense"),
+                          duration: Duration(seconds: 1),
+                        ),
+                      ),
+                      onPressed: () {},
+                      child: const Row(
+                        children: [
+                          Icon(Icons.payments, size: 32),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
-      home: Scaffold(
-        body: Stack(
-          children: [
-            PageView(
-              controller: _pageController,
-              onPageChanged: (index) => _changePage(index),
-              children: _pages,
-            ),
-            // TODO : Add Stack for Add Budget and Expenses
-          ],
-        ),
-        floatingActionButton: Builder(
-          builder: (BuildContext context) {
-            return FloatingActionButton(
-              onPressed: () {
-                setState(() {
-                  _isButtonExpanded = true;
-                });
+      floatingActionButton: Builder(
+        builder: (BuildContext context) {
+          return FloatingActionButton(
+            onPressed: () {
+              setState(() {
+                _isButtonExpanded = !_isButtonExpanded;
+              });
+            },
+            backgroundColor: Colors.white,
+            elevation: 6.0,
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 1000),
+              transitionBuilder: (Widget child, Animation<double> animation) {
+                return FadeTransition(opacity: animation, child: child);
               },
-              backgroundColor: Colors.white,
-              elevation: 6.0,
-              child: const Icon(Icons.add),
-            );
-          },
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        bottomNavigationBar: BottomAppBar(
-          shape: const CircularNotchedRectangle(),
-          padding: EdgeInsets.all(0.0),
-          clipBehavior: Clip.antiAlias,
-          elevation: 4,
-          notchMargin: 16.0,
-          child: SafeArea(
-            child: BottomNavigationBar(
-              onTap: (index) {
-                _pageController.animateToPage(index,
-                    duration: Duration(milliseconds: 500), curve: Curves.ease);
-              },
-              type: BottomNavigationBarType.fixed,
-              currentIndex: _currentIndex,
-              items: const [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home_outlined),
-                  label: '',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.bar_chart),
-                  label: '',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.track_changes),
-                  label: '',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.person),
-                  label: '',
-                ),
-              ],
+              key: ValueKey<bool>(_isButtonExpanded),
+              child: _isButtonExpanded
+                  ? const Icon(Icons.description)
+                  : const Icon(Icons.close),
             ),
+          );
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        padding: const EdgeInsets.all(0.0),
+        clipBehavior: Clip.antiAlias,
+        elevation: 4,
+        notchMargin: 16.0,
+        child: SafeArea(
+          child: BottomNavigationBar(
+            onTap: (index) {
+              _pageController.animateToPage(index,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.ease);
+            },
+            type: BottomNavigationBarType.fixed,
+            currentIndex: _currentIndex,
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home_outlined),
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.bar_chart),
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.track_changes),
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: '',
+              ),
+            ],
           ),
         ),
       ),
