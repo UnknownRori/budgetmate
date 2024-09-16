@@ -1,3 +1,4 @@
+import 'package:budget_mate/components/transaction_item.dart';
 import 'package:budget_mate/models/transaction.dart';
 import 'package:budget_mate/utils/greetings.dart';
 import 'package:budget_mate/utils/theme.dart';
@@ -81,7 +82,7 @@ class HomeMobile extends StatelessWidget {
                     const SizedBox(height: 16),
                     Text(
                       totalBalanceFormatted,
-                      style: mobile.textBig,
+                      style: mobile.textBigBold,
                     ),
                     const SizedBox(height: 16),
                     Row(
@@ -127,6 +128,30 @@ class HomeMobile extends StatelessWidget {
                     )
                   ],
                 ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Recent Transaction",
+                  style: mobile.textMidBold,
+                ),
+                IconButton(
+                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Not implemented yet!"),
+                      duration: Duration(seconds: 1),
+                    ),
+                  ),
+                  icon: const Icon(Icons.more_vert),
+                ),
+              ],
+            ),
+            Expanded(
+              child: TransactionItemList(
+                data: transactionRepo.latestTransactions(5),
               ),
             ),
           ],

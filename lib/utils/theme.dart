@@ -7,7 +7,9 @@ class Theme {
   final TextStyle textBold;
   final TextStyle textDanger;
 
-  final TextStyle textBig;
+  final TextStyle textMidBold;
+
+  final TextStyle textBigBold;
 
   final TextStyle textSmallInfo;
 
@@ -19,7 +21,8 @@ class Theme {
     required this.text,
     required this.textBold,
     required this.textDanger,
-    required this.textBig,
+    required this.textMidBold,
+    required this.textBigBold,
     required this.textSmallInfo,
     required this.pagePadding,
   });
@@ -33,7 +36,9 @@ const Theme mobile = Theme(
   text: TextStyle(fontSize: 16, fontFamily: 'poppins'),
   textBold: TextStyle(
       fontSize: 16, fontFamily: 'poppins', fontWeight: FontWeight.bold),
-  textBig: TextStyle(
+  textMidBold: TextStyle(
+      fontSize: 18, fontFamily: 'poppins', fontWeight: FontWeight.bold),
+  textBigBold: TextStyle(
       fontSize: 24, fontFamily: 'poppins', fontWeight: FontWeight.bold),
   textSmallInfo:
       TextStyle(fontSize: 14, fontFamily: 'poppins', color: Colors.grey),

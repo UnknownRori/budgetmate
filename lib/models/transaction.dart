@@ -15,7 +15,7 @@ Map<String, IconData> categoryIcons = {
   'Rent': Icons.home,
 };
 
-class Transaction {
+class Transaction extends ChangeNotifier {
   String id;
   TransactionType type;
   double amount;
@@ -91,6 +91,13 @@ class TransactionRepository {
     }
 
     return false;
+  }
+
+  List<Transaction> latestTransactions(int total) {
+    List<Transaction> sortedTransactions = List.from(_data);
+    sortedTransactions.sort((a, b) => b.date.compareTo(a.date));
+
+    return sortedTransactions.take(4).toList();
   }
 
   double get totalBalance {
