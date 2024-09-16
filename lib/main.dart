@@ -17,6 +17,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int _currentIndex = 0;
+  bool _isButtonExpanded = false;
   PageController _pageController = PageController(initialPage: 0);
   final List<Widget> _pages = [
     HomePage(),
@@ -35,16 +36,23 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
       ),
       home: Scaffold(
-        body: PageView(
-          controller: _pageController,
-          onPageChanged: (index) => _changePage(index),
-          children: _pages,
+        body: Stack(
+          children: [
+            PageView(
+              controller: _pageController,
+              onPageChanged: (index) => _changePage(index),
+              children: _pages,
+            ),
+            // TODO : Add Stack for Add Budget and Expenses
+          ],
         ),
         floatingActionButton: Builder(
           builder: (BuildContext context) {
             return FloatingActionButton(
               onPressed: () {
-                return changePageAnimation(context, AddBudgetPage());
+                setState(() {
+                  _isButtonExpanded = true;
+                });
               },
               backgroundColor: Colors.white,
               elevation: 6.0,
