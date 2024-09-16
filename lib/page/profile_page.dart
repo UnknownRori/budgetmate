@@ -11,6 +11,11 @@ class ProfilePage extends StatelessWidget {
         margin: EdgeInsets.only(left: 2, right: 2, top: 24, bottom: 24),
         child: Column(
           children: [
+            const Text(
+              "Profile",
+              style: title,
+            ),
+            const SizedBox(height: 26),
             SizedBox(
               width: 200,
               height: 200,
@@ -24,7 +29,7 @@ class ProfilePage extends StatelessWidget {
             ),
             const Text(
               "UnknownRori",
-              style: title,
+              style: subtitle,
             ),
             const SizedBox(height: 26),
             Column(

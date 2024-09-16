@@ -140,19 +140,19 @@ class _MainPageState extends State<MainPage> {
             items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.home_outlined),
-                label: '',
+                label: 'Home',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.bar_chart),
-                label: '',
+                label: 'Statistic',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.track_changes),
-                label: '',
+                label: 'Goals',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person),
-                label: '',
+                label: 'Profile',
               ),
             ],
           ),
