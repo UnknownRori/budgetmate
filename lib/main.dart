@@ -46,26 +46,39 @@ class _MyAppState extends State<MyApp> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: BottomAppBar(
           shape: const CircularNotchedRectangle(),
+          padding: EdgeInsets.all(0.0),
+          clipBehavior: Clip.antiAlias,
+          elevation: 4,
           notchMargin: 16.0,
-          child: Container(
-              margin: const EdgeInsets.only(top: 4.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  IconButton(
-                      onPressed: () => _changePage(0),
-                      icon: const Icon(Icons.home)),
-                  IconButton(
-                      onPressed: () => _changePage(1),
-                      icon: const Icon(Icons.bar_chart)),
-                  IconButton(
-                      onPressed: () => _changePage(2),
-                      icon: const Icon(Icons.track_changes)),
-                  IconButton(
-                      onPressed: () => _changePage(3),
-                      icon: const Icon(Icons.person)),
-                ],
-              )),
+          child: SafeArea(
+            child: BottomNavigationBar(
+              onTap: (index) {
+                setState(() {
+                  _changePage(index);
+                });
+              },
+              type: BottomNavigationBarType.fixed,
+              currentIndex: _currentIndex,
+              items: const [
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home_outlined),
+                  label: '',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.bar_chart),
+                  label: '',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.track_changes),
+                  label: '',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.person),
+                  label: '',
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
