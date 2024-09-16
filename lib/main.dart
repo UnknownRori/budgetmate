@@ -3,6 +3,7 @@ import 'package:budget_mate/page/goals_page.dart';
 import 'package:budget_mate/page/home_page.dart';
 import 'package:budget_mate/page/profile_page.dart';
 import 'package:budget_mate/page/statistics_page.dart';
+import 'package:budget_mate/utils/page_animation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,12 +17,12 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int _currentIndex = 0;
+  PageController _pageController = PageController(initialPage: 0);
   final List<Widget> _pages = [
     HomePage(),
     StatisticsPage(),
     GoalsPage(),
     ProfilePage(),
-    AddBudgetPage(),
   ];
 
   // This widget is the root of your application.
@@ -34,14 +35,22 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
       ),
       home: Scaffold(
-        body: _pages[_currentIndex],
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            _changePage(4);
+        body: PageView(
+          controller: _pageController,
+          onPageChanged: (index) => _changePage(index),
+          children: _pages,
+        ),
+        floatingActionButton: Builder(
+          builder: (BuildContext context) {
+            return FloatingActionButton(
+              onPressed: () {
+                return changePageAnimation(context, AddBudgetPage());
+              },
+              backgroundColor: Colors.white,
+              elevation: 6.0,
+              child: const Icon(Icons.add),
+            );
           },
-          backgroundColor: Colors.white,
-          elevation: 6.0,
-          child: const Icon(Icons.add),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: BottomAppBar(
@@ -53,9 +62,8 @@ class _MyAppState extends State<MyApp> {
           child: SafeArea(
             child: BottomNavigationBar(
               onTap: (index) {
-                setState(() {
-                  _changePage(index);
-                });
+                _pageController.animateToPage(index,
+                    duration: Duration(milliseconds: 500), curve: Curves.ease);
               },
               type: BottomNavigationBarType.fixed,
               currentIndex: _currentIndex,
