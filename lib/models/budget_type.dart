@@ -1,0 +1,4 @@
+enum BudgetType {
+  income,
+  expense,
+}
