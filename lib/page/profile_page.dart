@@ -17,11 +17,11 @@ class ProfilePage extends StatelessWidget {
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           if (constraints.maxWidth <= 600) {
-            return ProfileMobile();
+            return const ProfileMobile();
           } else if (constraints.maxWidth <= 1200) {
-            return ProfileMobile();
+            return const ProfileMobile();
           } else {
-            return ProfileMobile();
+            return const ProfileMobile();
           }
         },
       ),
@@ -36,7 +36,7 @@ class ProfileMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        margin: EdgeInsets.only(left: 2, right: 2, top: 24, bottom: 24),
+        margin: mobile.pagePadding,
         child: Column(
           children: [
             SizedBox(
@@ -58,7 +58,12 @@ class ProfileMobile extends StatelessWidget {
             Column(
               children: [
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Not implemented yet!"),
+                      duration: Duration(seconds: 1),
+                    ),
+                  ),
                   child: Row(
                     children: [
                       const Icon(Icons.person),
@@ -69,7 +74,12 @@ class ProfileMobile extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Not implemented yet!"),
+                      duration: Duration(seconds: 1),
+                    ),
+                  ),
                   child: Row(
                     children: [
                       const Icon(Icons.settings),
@@ -80,7 +90,12 @@ class ProfileMobile extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Not implemented yet!"),
+                      duration: Duration(seconds: 1),
+                    ),
+                  ),
                   child: Row(
                     children: [
                       const Icon(Icons.help),
@@ -91,7 +106,12 @@ class ProfileMobile extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Not implemented yet!"),
+                      duration: Duration(seconds: 1),
+                    ),
+                  ),
                   child: Row(
                     children: [
                       const Icon(

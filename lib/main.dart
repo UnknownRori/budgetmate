@@ -1,3 +1,4 @@
+import 'package:budget_mate/models/transaction.dart';
 import 'package:budget_mate/page/add_budget.dart';
 import 'package:budget_mate/page/add_expense.dart';
 import 'package:budget_mate/page/goals_page.dart';
@@ -6,9 +7,15 @@ import 'package:budget_mate/page/profile_page.dart';
 import 'package:budget_mate/page/statistics_page.dart';
 import 'package:budget_mate/utils/page_animation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MultiProvider(
+    providers: [
+      Provider(create: (_) => TransactionRepository()),
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -35,10 +42,10 @@ class _MainPageState extends State<MainPage> {
   bool _isButtonExpanded = false;
   PageController _pageController = PageController(initialPage: 0);
   final List<Widget> _pages = [
-    HomePage(),
-    StatisticsPage(),
-    GoalsPage(),
-    ProfilePage(),
+    const HomePage(),
+    const StatisticsPage(),
+    const GoalsPage(),
+    const ProfilePage(),
   ];
 
   // This widget is the root of your application.
