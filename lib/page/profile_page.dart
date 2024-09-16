@@ -6,16 +6,39 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blue,
+        title: const Text(
+          'Profile',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+      body: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          if (constraints.maxWidth <= 600) {
+            return ProfileMobile();
+          } else if (constraints.maxWidth <= 1200) {
+            return ProfileMobile();
+          } else {
+            return ProfileMobile();
+          }
+        },
+      ),
+    );
+  }
+}
+
+class ProfileMobile extends StatelessWidget {
+  const ProfileMobile({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
         margin: EdgeInsets.only(left: 2, right: 2, top: 24, bottom: 24),
         child: Column(
           children: [
-            const Text(
-              "Profile",
-              style: title,
-            ),
-            const SizedBox(height: 26),
             SizedBox(
               width: 200,
               height: 200,
@@ -27,56 +50,56 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
             ),
-            const Text(
+            Text(
               "UnknownRori",
-              style: subtitle,
+              style: mobile.subtitle,
             ),
             const SizedBox(height: 26),
             Column(
               children: [
                 ElevatedButton(
                   onPressed: () {},
-                  child: const Row(
+                  child: Row(
                     children: [
-                      Icon(Icons.person),
-                      SizedBox(width: 16),
-                      Text("Accounts", style: text)
+                      const Icon(Icons.person),
+                      const SizedBox(width: 16),
+                      Text("Accounts", style: mobile.text)
                     ],
                   ),
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {},
-                  child: const Row(
+                  child: Row(
                     children: [
-                      Icon(Icons.settings),
-                      SizedBox(width: 16),
-                      Text("Settings", style: text)
+                      const Icon(Icons.settings),
+                      const SizedBox(width: 16),
+                      Text("Settings", style: mobile.text)
                     ],
                   ),
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {},
-                  child: const Row(
+                  child: Row(
                     children: [
-                      Icon(Icons.help),
-                      SizedBox(width: 16),
-                      Text("Help & Support", style: text)
+                      const Icon(Icons.help),
+                      const SizedBox(width: 16),
+                      Text("Help & Support", style: mobile.text)
                     ],
                   ),
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {},
-                  child: const Row(
+                  child: Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.logout,
                         color: Colors.red,
                       ),
-                      SizedBox(width: 16),
-                      Text("Logout", style: textDanger)
+                      const SizedBox(width: 16),
+                      Text("Logout", style: mobile.textDanger)
                     ],
                   ),
                 ),

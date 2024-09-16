@@ -1,4 +1,5 @@
 import 'package:budget_mate/page/add_budget.dart';
+import 'package:budget_mate/page/add_expense.dart';
 import 'package:budget_mate/page/goals_page.dart';
 import 'package:budget_mate/page/home_page.dart';
 import 'package:budget_mate/page/profile_page.dart';
@@ -56,7 +57,7 @@ class _MainPageState extends State<MainPage> {
             left: MediaQuery.of(context).size.width / 2.0 - 44 * 2,
             child: AnimatedOpacity(
               duration: const Duration(milliseconds: 500),
-              opacity: _isButtonExpanded ? 0.0 : 1.0,
+              opacity: _isButtonExpanded ? 1.0 : 0.0,
               child: Center(
                 child: Row(
                   children: [
@@ -68,7 +69,9 @@ class _MainPageState extends State<MainPage> {
                           duration: Duration(seconds: 1),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        changePageAnimation(context, AddBudgetPage());
+                      },
                       child: const Row(
                         children: [
                           Icon(Icons.attach_money, size: 32),
@@ -84,7 +87,9 @@ class _MainPageState extends State<MainPage> {
                           duration: Duration(seconds: 1),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        changePageAnimation(context, AddExpensePage());
+                      },
                       child: const Row(
                         children: [
                           Icon(Icons.payments, size: 32),
@@ -115,8 +120,8 @@ class _MainPageState extends State<MainPage> {
               },
               key: ValueKey<bool>(_isButtonExpanded),
               child: _isButtonExpanded
-                  ? const Icon(Icons.description)
-                  : const Icon(Icons.close),
+                  ? const Icon(Icons.close)
+                  : const Icon(Icons.description),
             ),
           );
         },
