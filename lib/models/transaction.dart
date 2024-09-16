@@ -110,7 +110,7 @@ class TransactionRepository {
         case TransactionType.income:
           return total + transaction.amount;
         case TransactionType.expense:
-          return 0;
+          return total;
       }
     });
   }
@@ -119,9 +119,9 @@ class TransactionRepository {
     return _data.fold(0, (total, transaction) {
       switch (transaction.type) {
         case TransactionType.income:
-          return 0;
+          return total;
         case TransactionType.expense:
-          return 0;
+          return total + transaction.amount;
       }
     });
   }
