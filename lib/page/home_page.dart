@@ -151,7 +151,7 @@ class HomeMobile extends StatelessWidget {
             ),
             Expanded(
               child: TransactionItemList(
-                data: transactionRepo.latestTransactions(5),
+                data: transactionRepo.latestTransactions(8),
               ),
             ),
           ],

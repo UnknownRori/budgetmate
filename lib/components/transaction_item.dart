@@ -44,7 +44,7 @@ class TransactionItemList extends StatelessWidget {
                     Expanded(
                       flex: 3,
                       child: item.type == TransactionType.income
-                          ? Text(itemAmount)
+                          ? Text(itemAmount, style: mobile.text)
                           : Text(itemAmount, style: mobile.textDanger),
                     )
                   ],

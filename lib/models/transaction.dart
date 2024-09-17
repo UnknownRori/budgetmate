@@ -69,7 +69,7 @@ class TransactionRepository {
     Transaction(
         type: TransactionType.expense,
         date: DateTime.now(),
-        amount: 150000,
+        amount: 350000,
         category: "Entertainment"),
   ];
 
@@ -97,7 +97,7 @@ class TransactionRepository {
     List<Transaction> sortedTransactions = List.from(_data);
     sortedTransactions.sort((a, b) => b.date.compareTo(a.date));
 
-    return sortedTransactions.take(4).toList();
+    return sortedTransactions.take(total).toList();
   }
 
   double get totalBalance {
