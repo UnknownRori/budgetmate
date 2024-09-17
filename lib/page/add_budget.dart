@@ -49,8 +49,9 @@ class _AddBudgetMobileState extends State<AddBudgetMobile> {
           Padding(
             padding: mobile.pagePadding,
             child: Card(
+              elevation: 4,
               child: Padding(
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(24),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -107,7 +108,13 @@ class _AddBudgetMobileState extends State<AddBudgetMobile> {
                           Expanded(
                             flex: 2,
                             child: FilledButton(
-                              onPressed: () {},
+                              onPressed: () =>
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text("Not implemented yet!"),
+                                  duration: Duration(seconds: 1),
+                                ),
+                              ),
                               child: Text(
                                 "Save",
                                 style: mobile.text,
