@@ -5,17 +5,15 @@ void changePageAnimation(BuildContext context, Widget target) {
     PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => target,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        const begin = Offset(1.0, 0.0); // Slide in from right
-        const end = Offset(0.0, 0.0); // End at center
+        const begin = Offset(0.0, 1.0);
+        const end = Offset.zero;
         const curve = Curves.ease;
 
         var tween =
             Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-        var offsetAnimation = animation.drive(tween);
 
-        // The child is the new screen; SlideTransition defines animation.
         return SlideTransition(
-          position: offsetAnimation,
+          position: animation.drive(tween),
           child: child,
         );
       },
