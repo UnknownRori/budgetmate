@@ -77,6 +77,9 @@ class _MainPageState extends State<MainPage> {
                         ),
                       ),
                       onPressed: () {
+                        setState(() {
+                          _isButtonExpanded = false;
+                        });
                         changePageAnimation(context, AddBudgetPage());
                       },
                       child: const Row(
@@ -95,6 +98,9 @@ class _MainPageState extends State<MainPage> {
                         ),
                       ),
                       onPressed: () {
+                        setState(() {
+                          _isButtonExpanded = false;
+                        });
                         changePageAnimation(context, AddExpensePage());
                       },
                       child: const Row(
