@@ -52,6 +52,27 @@ class _StatisticsMobileState extends State<StatisticsMobile> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Row(
+              children: [
+                FilledButton(
+                    onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Not implemented yet!"),
+                            duration: Duration(seconds: 1),
+                          ),
+                        ),
+                    child: Text("Spendings", style: mobile.text)),
+                const SizedBox(width: 16),
+                OutlinedButton(
+                    onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Not implemented yet!"),
+                            duration: Duration(seconds: 1),
+                          ),
+                        ),
+                    child: Text("Income", style: mobile.text)),
+              ],
+            ),
             // TODO : Make it correspond with the data
             Expanded(
               child: LineChart(
@@ -121,6 +142,7 @@ class _StatisticsMobileState extends State<StatisticsMobile> {
   LineChartData lineChartData() {
     return LineChartData(
       borderData: FlBorderData(show: false),
+      gridData: const FlGridData(show: false),
       titlesData: FlTitlesData(
         show: true,
         rightTitles: const AxisTitles(
@@ -157,7 +179,7 @@ class _StatisticsMobileState extends State<StatisticsMobile> {
             FlSpot(11, 5),
           ],
           isCurved: true,
-          color: Colors.red,
+          color: Colors.red.withOpacity(0.2),
           barWidth: 5,
           isStrokeCapRound: true,
           dotData: const FlDotData(
@@ -165,7 +187,14 @@ class _StatisticsMobileState extends State<StatisticsMobile> {
           ),
           belowBarData: BarAreaData(
             show: true,
-            color: Colors.red.withOpacity(0.5),
+            gradient: LinearGradient(
+              begin: const Alignment(0.5, 0.0),
+              end: const Alignment(0.5, 1.0),
+              colors: [
+                Colors.red.withOpacity(0.4),
+                Colors.red.withOpacity(0.7),
+              ],
+            ),
           ),
         ),
         LineChartBarData(
@@ -179,7 +208,7 @@ class _StatisticsMobileState extends State<StatisticsMobile> {
             FlSpot(11, 4),
           ],
           isCurved: true,
-          color: Colors.green,
+          color: Colors.green.withOpacity(0.2),
           barWidth: 5,
           isStrokeCapRound: true,
           dotData: const FlDotData(
@@ -187,7 +216,14 @@ class _StatisticsMobileState extends State<StatisticsMobile> {
           ),
           belowBarData: BarAreaData(
             show: true,
-            color: Colors.green.withOpacity(0.5),
+            gradient: LinearGradient(
+              begin: const Alignment(0.5, 0.0),
+              end: const Alignment(0.5, 1.0),
+              colors: [
+                Colors.green.withOpacity(0.4),
+                Colors.green.withOpacity(0.7),
+              ],
+            ),
           ),
         ),
       ],
