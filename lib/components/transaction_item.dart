@@ -19,15 +19,15 @@ class TransactionItemList extends StatelessWidget {
           final item = data[index];
 
           final String itemAmount = formatter.format(item.amount);
-          return InkWell(
-            onTap: () => ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text("Not implemented yet!"),
-                duration: Duration(seconds: 1),
+          return Card(
+            elevation: 4,
+            child: InkWell(
+              onTap: () => ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("Not implemented yet!"),
+                  duration: Duration(seconds: 1),
+                ),
               ),
-            ),
-            child: Card(
-              elevation: 4,
               child: Padding(
                 padding: const EdgeInsets.all(12),
                 child: Row(

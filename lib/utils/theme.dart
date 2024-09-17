@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+class AppColor {
+  static const normal = Colors.black;
+  static const secondary = Colors.grey;
+  static const danger = Colors.red;
+}
+
 class Theme {
   final TextStyle title;
   final TextStyle subtitle;
@@ -41,7 +47,8 @@ const Theme mobile = Theme(
   textBigBold: TextStyle(
       fontSize: 24, fontFamily: 'poppins', fontWeight: FontWeight.bold),
   textSmallInfo:
-      TextStyle(fontSize: 14, fontFamily: 'poppins', color: Colors.grey),
-  textDanger: TextStyle(fontSize: 16, color: Colors.red, fontFamily: 'poppins'),
+      TextStyle(fontSize: 14, fontFamily: 'poppins', color: AppColor.secondary),
+  textDanger:
+      TextStyle(fontSize: 16, color: AppColor.danger, fontFamily: 'poppins'),
   pagePadding: EdgeInsets.only(left: 16, right: 16, top: 24, bottom: 24),
 );

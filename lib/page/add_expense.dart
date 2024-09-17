@@ -30,8 +30,8 @@ class AddExpensePage extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(left: 24),
-                          child: const Text("Add Budget",
+                          margin: const EdgeInsets.only(left: 24),
+                          child: const Text("Add Expense",
                               style: TextStyle(fontSize: 24)),
                         ),
                       ],
