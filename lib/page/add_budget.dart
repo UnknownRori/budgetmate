@@ -1,3 +1,4 @@
+import 'package:budget_mate/components/back_button.dart';
 import 'package:budget_mate/components/text_field.dart';
 import 'package:budget_mate/models/transaction.dart';
 import 'package:budget_mate/utils/theme.dart';
@@ -39,36 +40,11 @@ class _AddBudgetMobileState extends State<AddBudgetMobile> {
     return Scaffold(
       body: Column(
         children: [
-          Row(
-            children: [
-              SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: Colors.grey,
-                        child: IconButton(
-                          icon: const Icon(
-                            Icons.arrow_back,
-                            color: Colors.white,
-                          ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(left: 24),
-                        child: const Text("Add Budget",
-                            style: TextStyle(fontSize: 24)),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+          const SafeArea(
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: CustomBackButton(label: "Add Income"),
+            ),
           ),
           Padding(
             padding: mobile.pagePadding,
