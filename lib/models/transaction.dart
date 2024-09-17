@@ -15,7 +15,23 @@ Map<String, IconData> categoryIcons = {
   'Rent': Icons.home,
 };
 
-class Transaction extends ChangeNotifier {
+class SumTransaction {
+  TransactionType type;
+  double amount;
+  String category;
+
+  SumTransaction({
+    required this.type,
+    required this.amount,
+    required this.category,
+  });
+
+  IconData getCategoryIcon() {
+    return categoryIcons[category] ?? Icons.help;
+  }
+}
+
+class Transaction {
   String id;
   TransactionType type;
   double amount;
@@ -91,6 +107,27 @@ class TransactionRepository {
     }
 
     return false;
+  }
+
+  List<SumTransaction> sumExpenseByCategory() {
+    Map<String, SumTransaction> categorySums = {};
+
+    for (var transaction in _data) {
+      if (categorySums.containsKey(transaction.category)) {
+        if (transaction.type == TransactionType.expense) {
+          categorySums[transaction.category]!.amount += transaction.amount;
+        }
+      } else {
+        if (transaction.type == TransactionType.expense) {
+          categorySums[transaction.category] = SumTransaction(
+              type: transaction.type,
+              amount: transaction.amount,
+              category: transaction.category);
+        }
+      }
+    }
+
+    return categorySums.values.toList();
   }
 
   List<Transaction> latestTransactions(int total) {

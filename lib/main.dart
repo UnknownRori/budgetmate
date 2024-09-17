@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
       title: 'Budget Mate',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        scaffoldBackgroundColor: const Color(0xedededff),
         useMaterial3: true,
       ),
       home: MainPage(),
