@@ -1,3 +1,5 @@
+import 'package:budget_mate/components/goals_item.dart';
+import 'package:budget_mate/models/transaction.dart';
 import 'package:budget_mate/utils/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -70,7 +72,13 @@ class _GoalsMobileState extends State<GoalsMobile> {
                         Text("Left", style: mobile.text),
                         Text("Rp. 950.000", style: mobile.text),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () =>
+                              ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text("Not implemented yet!"),
+                              duration: Duration(seconds: 1),
+                            ),
+                          ),
                           icon: const Icon(Icons.more_horiz),
                         ),
                       ],
@@ -93,7 +101,28 @@ class _GoalsMobileState extends State<GoalsMobile> {
                     }),
               ],
             ),
+            const SizedBox(height: 24),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("Budget Category", style: mobile.textBold),
+                IconButton(
+                    onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Not implemented yet!"),
+                            duration: Duration(seconds: 1),
+                          ),
+                        ),
+                    icon: const Icon(Icons.add)),
+              ],
+            ),
             const SizedBox(height: 16),
+            Expanded(
+              child: GoalsItemList(
+                  data: categoryIcons.values
+                      .where((n) => n.goalAmount > 0)
+                      .toList()),
+            ),
           ],
         ),
       ),

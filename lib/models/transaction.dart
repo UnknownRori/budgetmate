@@ -6,20 +6,26 @@ enum TransactionType {
   expense,
 }
 
+// TODO : Refactor this into different repository
 Map<String, Category> categoryIcons = {
-  'Salary': Category(goalAmount: 0, icon: Icons.attach_money),
-  'Shopping': Category(goalAmount: 900000, icon: Icons.shopping_cart),
-  'Electricity': Category(goalAmount: 200000, icon: Icons.electrical_services),
-  'Transport': Category(goalAmount: 150000, icon: Icons.directions_bus),
-  'Entertainment': Category(goalAmount: 250000, icon: Icons.movie),
-  'Rent': Category(goalAmount: 150000, icon: Icons.home),
+  'Salary': Category(name: "Salary", goalAmount: 0, icon: Icons.attach_money),
+  'Shopping':
+      Category(name: "Shopping", goalAmount: 900000, icon: Icons.shopping_cart),
+  'Electricity': Category(
+      name: "Electricity", goalAmount: 200000, icon: Icons.electrical_services),
+  'Transport': Category(
+      name: "Transport", goalAmount: 150000, icon: Icons.directions_bus),
+  'Entertainment':
+      Category(name: "Entertainment", goalAmount: 250000, icon: Icons.movie),
+  'Rent': Category(name: "Rent", goalAmount: 150000, icon: Icons.home),
 };
 
 class Category {
+  String name;
   double goalAmount;
   IconData icon;
 
-  Category({required this.goalAmount, required this.icon});
+  Category({required this.name, required this.goalAmount, required this.icon});
 }
 
 class SumTransaction {
