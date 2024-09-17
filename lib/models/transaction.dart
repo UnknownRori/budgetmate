@@ -54,7 +54,7 @@ class Transaction {
   }
 }
 
-class TransactionRepository {
+class TransactionRepository with ChangeNotifier {
   // Default dummy data
   List<Transaction> _data = [
     Transaction(
@@ -89,8 +89,10 @@ class TransactionRepository {
         category: "Entertainment"),
   ];
 
-  void addTransaction(Transaction transaction) {
+  bool addTransaction(Transaction transaction) {
+    notifyListeners();
     _data.add(transaction);
+    return true;
   }
 
   List<Transaction> getAll() {
@@ -103,6 +105,7 @@ class TransactionRepository {
 
     if (transactionIndex != -1) {
       _data.removeAt(transactionIndex);
+      notifyListeners();
       return true;
     }
 

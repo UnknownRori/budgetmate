@@ -5,6 +5,7 @@ import 'package:budget_mate/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class AddBudgetPage extends StatelessWidget {
   const AddBudgetPage({super.key});
@@ -108,20 +109,49 @@ class _AddBudgetMobileState extends State<AddBudgetMobile> {
                           Expanded(
                             flex: 2,
                             child: FilledButton(
-                              onPressed: () =>
+                              onPressed: () {
+                                if (_amountController.text == "" ||
+                                    categoryData == "" ||
+                                    _dateController.text == "") {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text("Not implemented yet!"),
-                                  duration: Duration(seconds: 1),
-                                ),
-                              ),
+                                      SnackBar(
+                                          backgroundColor:
+                                              Colors.red.withOpacity(0.8),
+                                          content: Text(
+                                              "Please fill out the form",
+                                              style: mobile.text),
+                                          duration:
+                                              const Duration(seconds: 1)));
+                                }
+
+                                final isSuccess = context
+                                    .read<TransactionRepository>()
+                                    .addTransaction(Transaction(
+                                        type: TransactionType.income,
+                                        amount: double.parse(
+                                            _amountController.text),
+                                        date: DateTime.parse(
+                                            _dateController.text),
+                                        category: categoryData));
+
+                                if (isSuccess) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          backgroundColor:
+                                              Colors.green.withOpacity(0.8),
+                                          content: Text("Success",
+                                              style: mobile.text),
+                                          duration:
+                                              const Duration(seconds: 1)));
+                                }
+                              },
                               child: Text(
                                 "Save",
                                 style: mobile.text,
                               ),
                             ),
                           ),
-                          Spacer(flex: 1),
+                          const Spacer(flex: 1),
                           Expanded(
                             flex: 2,
                             child: OutlinedButton(
@@ -154,7 +184,6 @@ class _AddBudgetMobileState extends State<AddBudgetMobile> {
       firstDate: DateTime(2000),
       lastDate: DateTime(2101),
     );
-    print(picked);
     if (picked != null) {
       // Format the date and set it to the TextField
       String formattedDate = DateFormat('yyyy-MM-dd').format(picked);

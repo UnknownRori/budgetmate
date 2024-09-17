@@ -12,7 +12,7 @@ import 'package:provider/provider.dart';
 void main() {
   runApp(MultiProvider(
     providers: [
-      Provider(create: (_) => TransactionRepository()),
+      ChangeNotifierProvider(create: (_) => TransactionRepository()),
     ],
     child: MyApp(),
   ));

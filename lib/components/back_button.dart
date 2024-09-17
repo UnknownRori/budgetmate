@@ -23,7 +23,7 @@ class CustomBackButton extends StatelessWidget {
         ),
         Container(
           margin: const EdgeInsets.only(left: 24),
-          child: const Text("Add Income", style: TextStyle(fontSize: 24)),
+          child: Text(label, style: TextStyle(fontSize: 24)),
         ),
       ],
     );

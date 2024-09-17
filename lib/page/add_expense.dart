@@ -4,6 +4,7 @@ import 'package:budget_mate/models/transaction.dart';
 import 'package:budget_mate/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
 class AddExpensePage extends StatelessWidget {
@@ -108,20 +109,49 @@ class _AddExpenseMobileState extends State<AddExpenseMobile> {
                           Expanded(
                             flex: 2,
                             child: FilledButton(
-                              onPressed: () =>
+                              onPressed: () {
+                                if (_amountController.text == "" ||
+                                    categoryData == "" ||
+                                    _dateController.text == "") {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text("Not implemented yet!"),
-                                  duration: Duration(seconds: 1),
-                                ),
-                              ),
+                                      SnackBar(
+                                          backgroundColor:
+                                              Colors.red.withOpacity(0.8),
+                                          content: Text(
+                                              "Please fill out the form",
+                                              style: mobile.text),
+                                          duration:
+                                              const Duration(seconds: 1)));
+                                }
+
+                                final isSuccess = context
+                                    .read<TransactionRepository>()
+                                    .addTransaction(Transaction(
+                                        type: TransactionType.expense,
+                                        amount: double.parse(
+                                            _amountController.text),
+                                        date: DateTime.parse(
+                                            _dateController.text),
+                                        category: categoryData));
+
+                                if (isSuccess) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          backgroundColor:
+                                              Colors.green.withOpacity(0.8),
+                                          content: Text("Success",
+                                              style: mobile.text),
+                                          duration:
+                                              const Duration(seconds: 1)));
+                                }
+                              },
                               child: Text(
                                 "Save",
                                 style: mobile.text,
                               ),
                             ),
                           ),
-                          Spacer(flex: 1),
+                          const Spacer(flex: 1),
                           Expanded(
                             flex: 2,
                             child: OutlinedButton(
