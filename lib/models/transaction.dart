@@ -6,14 +6,21 @@ enum TransactionType {
   expense,
 }
 
-Map<String, IconData> categoryIcons = {
-  'Salary': Icons.attach_money,
-  'Shopping': Icons.shopping_cart,
-  'Electricity': Icons.electrical_services,
-  'Transport': Icons.directions_bus,
-  'Entertainment': Icons.movie,
-  'Rent': Icons.home,
+Map<String, Category> categoryIcons = {
+  'Salary': Category(goalAmount: 0, icon: Icons.attach_money),
+  'Shopping': Category(goalAmount: 900000, icon: Icons.shopping_cart),
+  'Electricity': Category(goalAmount: 200000, icon: Icons.electrical_services),
+  'Transport': Category(goalAmount: 150000, icon: Icons.directions_bus),
+  'Entertainment': Category(goalAmount: 250000, icon: Icons.movie),
+  'Rent': Category(goalAmount: 150000, icon: Icons.home),
 };
+
+class Category {
+  double goalAmount;
+  IconData icon;
+
+  Category({required this.goalAmount, required this.icon});
+}
 
 class SumTransaction {
   TransactionType type;
@@ -27,7 +34,7 @@ class SumTransaction {
   });
 
   IconData getCategoryIcon() {
-    return categoryIcons[category] ?? Icons.help;
+    return categoryIcons[category]!.icon ?? Icons.help;
   }
 }
 
@@ -50,7 +57,7 @@ class Transaction {
   // Default to 'help' if no icon is found
 
   IconData getCategoryIcon() {
-    return categoryIcons[category] ?? Icons.help;
+    return categoryIcons[category]!.icon ?? Icons.help;
   }
 }
 

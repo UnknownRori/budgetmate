@@ -70,7 +70,7 @@ class _AddBudgetMobileState extends State<AddBudgetMobile> {
                           return DropdownMenuEntry<String>(
                             value: entry.key, // The category name as the value
                             label: entry.key,
-                            leadingIcon: Icon(entry.value),
+                            leadingIcon: Icon(entry.value.icon),
                           );
                         }).toList(),
                       ),
